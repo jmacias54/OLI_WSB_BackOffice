@@ -11,10 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import mx.com.amx.unotv.oli.wsb.backoffice.bo.ItemBO;
 import mx.com.amx.unotv.oli.wsb.backoffice.controller.exception.ControllerException;
-import mx.com.amx.unotv.oli.wsb.backoffice.model.NNota;
+import mx.com.amx.unotv.oli.wsb.backoffice.response.ItemResponse;
 
 /**
  * @author Jesus A. Macias Benitez
@@ -34,11 +33,11 @@ public class ItemController {
 
 	@RequestMapping(value = "/get_list_items_categoria/{idCategotia}", method = RequestMethod.POST, headers = "Accept=application/json; charset=utf-8")
 	@ResponseBody
-	public List<NNota> findByIdCategoria(@PathVariable String idCategotia) throws ControllerException {
+	public List<ItemResponse> findByIdCategoria(@PathVariable String idCategotia) throws ControllerException {
 
 		logger.info("--- findByIdCategoria [ ItemController ]---- ");
 
-		List<NNota> lista = null;
+		List<ItemResponse> lista = null;
 
 		try {
 
@@ -55,11 +54,11 @@ public class ItemController {
 	
 	@RequestMapping(value = "/get_list_items_tipo_nota/{tipoNota}", method = RequestMethod.POST, headers = "Accept=application/json; charset=utf-8")
 	@ResponseBody
-	public List<NNota> findByTipoNota(@PathVariable String tipoNota) throws ControllerException {
+	public List<ItemResponse> findByTipoNota(@PathVariable String tipoNota) throws ControllerException {
 
 		logger.info("--- findByTipoNota [ ItemController ]---- ");
 
-		List<NNota> lista = null;
+		List<ItemResponse> lista = null;
 
 		try {
 
@@ -76,11 +75,11 @@ public class ItemController {
 	
 	@RequestMapping(value = "/get_list_items_video/{idClassVideo}", method = RequestMethod.POST, headers = "Accept=application/json; charset=utf-8")
 	@ResponseBody
-	public List<NNota> findByIdClassVideo(@PathVariable String idClassVideo) throws ControllerException {
+	public List<ItemResponse> findByIdClassVideo(@PathVariable String idClassVideo) throws ControllerException {
 
 		logger.info("--- findByIdClassVideo [ ItemController ]---- ");
 
-		List<NNota> lista = null;
+		List<ItemResponse> lista = null;
 
 		try {
 
@@ -93,5 +92,8 @@ public class ItemController {
 
 		return lista;
 	}
+	
+	
+
 
 }

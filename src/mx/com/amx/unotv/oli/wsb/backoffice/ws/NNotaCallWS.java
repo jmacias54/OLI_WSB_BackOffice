@@ -16,8 +16,9 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
-import mx.com.amx.unotv.oli.wsb.backoffice.model.NNota;
+import mx.com.amx.unotv.oli.wsb.backoffice.response.ItemResponse;
 import mx.com.amx.unotv.oli.wsb.backoffice.response.ListResponse;
+import mx.com.amx.unotv.oli.wsb.backoffice.response.MagazineResponse;
 import mx.com.amx.unotv.oli.wsb.backoffice.ws.exception.NNotaCallWSException;
 
 
@@ -66,7 +67,7 @@ public class NNotaCallWS {
 	}
 	
 	
-	public List<NNota> findByIdClassVideo(String idClassVideo) throws NNotaCallWSException {
+	public List<ItemResponse> findByIdClassVideo(String idClassVideo) throws NNotaCallWSException {
 
 		logger.info("--- findByIdClassVideo [ NNotaCallWS ]---- ");
 		String METHOD = "/classVideo/";
@@ -74,7 +75,7 @@ public class NNotaCallWS {
 		
 		logger.info("--- URL : " + URL_WS);
 
-		ListResponse<NNota> response = null;
+		ListResponse<ItemResponse> response = null;
 
 		try {
 			logger.info("URL_WS: " + URL_WS);
@@ -98,15 +99,15 @@ public class NNotaCallWS {
 		}
 		
 		if(response == null) {
-			response = new ListResponse<NNota>();
-			response.setLista(Collections.<NNota>emptyList());
+			response = new ListResponse<ItemResponse>();
+			response.setLista(Collections.<ItemResponse>emptyList());
 		}
 
 		return response.getLista();
 
 	}
 	
-	public List<NNota> findByTipoNota(String tipoNota) throws NNotaCallWSException {
+	public List<ItemResponse> findByTipoNota(String tipoNota) throws NNotaCallWSException {
 
 		logger.info("--- findByTipoNota [ NNotaCallWS ]---- ");
 		String METHOD = "/tipoNota/";
@@ -114,7 +115,7 @@ public class NNotaCallWS {
 
 		logger.info("--- URL : " + URL_WS);
 
-		ListResponse<NNota> response = null;
+		ListResponse<ItemResponse> response = null;
 
 		try {
 			logger.info("URL_WS: " + URL_WS);
@@ -138,8 +139,8 @@ public class NNotaCallWS {
 		}
 		
 		if(response == null) {
-			response = new ListResponse<NNota>();
-			response.setLista(Collections.<NNota>emptyList());
+			response = new ListResponse<ItemResponse>();
+			response.setLista(Collections.<ItemResponse>emptyList());
 		}
 
 		return response.getLista();
@@ -147,7 +148,7 @@ public class NNotaCallWS {
 	}
 	
 	
-	public List<NNota> findByIdCategoria(String idCategoria) throws NNotaCallWSException {
+	public List<ItemResponse> findByIdCategoria(String idCategoria) throws NNotaCallWSException {
 
 		logger.info("--- findByIdCategoria [ NNotaCallWS ]---- ");
 		String METHOD = "/categoria/";
@@ -155,7 +156,7 @@ public class NNotaCallWS {
 
 		logger.info("--- URL : " + URL_WS);
 
-		ListResponse<NNota> response = null;
+		ListResponse<ItemResponse> response = null;
 
 		try {
 			logger.info("URL_WS: " + URL_WS);
@@ -179,8 +180,8 @@ public class NNotaCallWS {
 		}
 		
 		if(response == null) {
-			response = new ListResponse<NNota>();
-			response.setLista(Collections.<NNota>emptyList());
+			response = new ListResponse<ItemResponse>();
+			response.setLista(Collections.<ItemResponse>emptyList());
 		}
 
 		return response.getLista();
@@ -189,5 +190,45 @@ public class NNotaCallWS {
 	
 	
 
+	
+	public List<MagazineResponse> findByMagazine( String idMagazine) throws NNotaCallWSException {
+
+		logger.info("--- findByMagazine [ NNotaCallWS ]---- ");
+		String METHOD = "/magazine/";
+		String URL_WS = URL_WS_BASE + URL_WS_NNOTA + METHOD +idMagazine;
+
+		logger.info("--- URL : " + URL_WS);
+
+		ListResponse<MagazineResponse> response = null;
+
+		try {
+			logger.info("URL_WS: " + URL_WS);
+			HttpEntity<String> entity = new HttpEntity<String>("Accept=application/json; charset=utf-8", headers);
+			
+			response = restTemplate.postForObject(URL_WS , entity, ListResponse.class);
+
+			if(response != null)
+			logger.info(" Registros obtenidos --> " + response.toString());
+
+		} catch (NullPointerException npe) {
+			
+			return null;
+		}catch (RestClientResponseException rre) {
+			logger.error("RestClientResponseException findByMagazine [ NNotaCallWS ]: " + rre.getResponseBodyAsString());
+			logger.error("RestClientResponseException findByMagazine [ NNotaCallWS ]: ", rre);
+			throw new NNotaCallWSException(rre.getResponseBodyAsString());
+		} catch (Exception e) {
+			logger.error("Exception findByMagazine  [ NNotaCallWS ]: ", e);
+			throw new NNotaCallWSException(e.getMessage());
+		}
+		
+		if(response == null) {
+			response = new ListResponse<MagazineResponse>();
+			response.setLista(Collections.<MagazineResponse>emptyList());
+		}
+
+		return response.getLista();
+
+	}
 
 }

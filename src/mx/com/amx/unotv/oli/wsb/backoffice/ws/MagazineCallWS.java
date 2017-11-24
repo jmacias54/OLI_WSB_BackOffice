@@ -3,15 +3,21 @@
  */
 package mx.com.amx.unotv.oli.wsb.backoffice.ws;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Properties;
-
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
+import mx.com.amx.unotv.oli.wsb.backoffice.model.Magazine;
+import mx.com.amx.unotv.oli.wsb.backoffice.response.ListResponse;
+import mx.com.amx.unotv.oli.wsb.backoffice.ws.exception.MagazineCallWSException;
 
 /**
  * @author Jesus A. Macias Benitez
@@ -55,6 +61,46 @@ public class MagazineCallWS {
 		String ambiente = props.getProperty("ambiente");
 		URL_WS_BASE = props.getProperty(ambiente + ".url.ws.base");
 		URL_WS_MAGAZINE = props.getProperty(ambiente + ".url.ws.magazine");
+	}
+	
+	
+	public List<Magazine> findAll() throws MagazineCallWSException {
+
+		logger.info("--- findAll [ MagazineCallWS ]---- ");
+		String METHOD = "/";
+		String URL_WS = URL_WS_BASE + URL_WS_MAGAZINE + METHOD ;
+		
+		logger.info("--- URL : " + URL_WS);
+
+		ListResponse<Magazine> response = null;
+
+		try {
+			logger.info("URL_WS: " + URL_WS);
+			HttpEntity<String> entity = new HttpEntity<String>("Accept=application/json; charset=utf-8", headers);
+			
+			response = restTemplate.postForObject(URL_WS , entity, ListResponse.class);
+
+			if(response != null)
+			logger.info(" Registros obtenidos --> " + response.toString());
+
+		} catch (NullPointerException npe) {
+			
+			return null;
+		}catch (RestClientResponseException rre) {
+			logger.error("RestClientResponseException findAll [ MagazineCallWS ]: " + rre.getResponseBodyAsString());
+			logger.error("RestClientResponseException findAll [ MagazineCallWS ]: ", rre);
+			throw new MagazineCallWSException(rre.getResponseBodyAsString());
+		} catch (Exception e) {
+			logger.error("Exception findAll  [ MagazineCallWS ]: ", e);
+			throw new MagazineCallWSException(e.getMessage());
+		}
+		
+		if(response == null) {
+			response = new ListResponse<Magazine>();
+			response.setLista(Collections.<Magazine>emptyList());
+		}
+
+		return response.getLista();
 	}
 
 }

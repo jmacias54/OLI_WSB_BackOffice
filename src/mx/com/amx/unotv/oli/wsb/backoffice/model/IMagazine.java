@@ -17,6 +17,14 @@ public class IMagazine implements Serializable {
 
 	
 	private String fcIdContenido;
+	
+	
+	/** The fc url externa. */
+	private String fcUrlExterna;
+	
+	/** The fi orden. */
+	private Integer fiOrden;
+
 
 	public IMagazine() {
 	}
@@ -35,6 +43,22 @@ public class IMagazine implements Serializable {
 
 	public void setFcIdContenido(String fcIdContenido) {
 		this.fcIdContenido = fcIdContenido;
+	}
+
+	public String getFcUrlExterna() {
+		return fcUrlExterna;
+	}
+
+	public void setFcUrlExterna(String fcUrlExterna) {
+		this.fcUrlExterna = fcUrlExterna;
+	}
+
+	public Integer getFiOrden() {
+		return fiOrden;
+	}
+
+	public void setFiOrden(Integer fiOrden) {
+		this.fiOrden = fiOrden;
 	}
 
 	

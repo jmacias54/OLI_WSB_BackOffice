@@ -3,15 +3,20 @@
  */
 package mx.com.amx.unotv.oli.wsb.backoffice.ws;
 
+
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
+import mx.com.amx.unotv.oli.wsb.backoffice.model.IMagazine;
+import mx.com.amx.unotv.oli.wsb.backoffice.ws.exception.IMagazineCallWSException;
 
 /**
  * @author Jesus A. Macias Benitez
@@ -54,5 +59,63 @@ public class IMagazineCallWS {
 		String ambiente = props.getProperty("ambiente");
 		URL_WS_BASE = props.getProperty(ambiente + ".url.ws.base");
 		URL_WS_I_MAGAZINE = props.getProperty(ambiente + ".url.ws.imagazine");
+	}
+	
+	
+	
+	
+	public void delete(String idMagazine) throws IMagazineCallWSException {
+
+		logger.info("--- delete [ MagazineCallWS ]---- ");
+		String METHOD = "/delete/";
+		String URL_WS = URL_WS_BASE + URL_WS_I_MAGAZINE + METHOD +idMagazine ;
+		
+		logger.info("--- URL : " + URL_WS);
+
+		
+
+		try {
+			logger.info("URL_WS: " + URL_WS);
+			HttpEntity<String> entity = new HttpEntity<String>("Accept=application/json; charset=utf-8", headers);
+			
+			 restTemplate.postForObject(URL_WS , entity,Integer.class);
+
+
+		} catch (RestClientResponseException rre) {
+			logger.error("RestClientResponseException delete [ MagazineCallWS ]: " + rre.getResponseBodyAsString());
+			logger.error("RestClientResponseException delete [ MagazineCallWS ]: ", rre);
+			throw new IMagazineCallWSException(rre.getResponseBodyAsString());
+		} catch (Exception e) {
+			logger.error("Exception delete  [ MagazineCallWS ]: ", e);
+			throw new IMagazineCallWSException(e.getMessage());
+		}
+	}
+	
+
+	public int insert(IMagazine imagazine) throws IMagazineCallWSException {
+
+		logger.info("--- insert [ MagazineCallWS ]---- ");
+		String METHOD = "/insert/";
+		String URL_WS = URL_WS_BASE + URL_WS_I_MAGAZINE + METHOD  ;
+		int response = 0;
+		logger.info("--- URL : " + URL_WS);
+
+		
+
+		try {
+			logger.info("URL_WS: " + URL_WS);
+			
+			response = restTemplate.postForObject(URL_WS , imagazine,Integer.class);
+
+
+		} catch (RestClientResponseException rre) {
+			logger.error("RestClientResponseException insert [ MagazineCallWS ]: " + rre.getResponseBodyAsString());
+			logger.error("RestClientResponseException insert [ MagazineCallWS ]: ", rre);
+			throw new IMagazineCallWSException(rre.getResponseBodyAsString());
+		} catch (Exception e) {
+			logger.error("Exception insert  [ MagazineCallWS ]: ", e);
+			throw new IMagazineCallWSException(e.getMessage());
+		}
+		return response;
 	}
 }

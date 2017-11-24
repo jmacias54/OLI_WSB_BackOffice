@@ -7,9 +7,9 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import mx.com.amx.unotv.oli.wsb.backoffice.bo.exception.ItemBOException;
-import mx.com.amx.unotv.oli.wsb.backoffice.model.NNota;
+import mx.com.amx.unotv.oli.wsb.backoffice.response.ItemResponse;
+import mx.com.amx.unotv.oli.wsb.backoffice.response.MagazineResponse;
 import mx.com.amx.unotv.oli.wsb.backoffice.ws.NNotaCallWS;
 
 
@@ -27,9 +27,9 @@ public class ItemBO {
 	NNotaCallWS nNotaCallWS;
 	
 	
-	public List<NNota> findByIdClassVideo(String idClassVideo) throws ItemBOException{
+	public List<ItemResponse> findByIdClassVideo(String idClassVideo) throws ItemBOException{
 		logger.info("--- findByIdClassVideo [ ItemBO ]---- ");
-		List<NNota> lista = null;
+		List<ItemResponse> lista = null;
 		
 		try {
 			lista = nNotaCallWS.findByIdClassVideo(idClassVideo);
@@ -43,9 +43,9 @@ public class ItemBO {
 	
 	
 	
-	public List<NNota> findByTipoNota(String tipoNota) throws ItemBOException{
+	public List<ItemResponse> findByTipoNota(String tipoNota) throws ItemBOException{
 		logger.info("--- findByTipoNota [ ItemBO ]---- ");
-		List<NNota> lista = null;
+		List<ItemResponse> lista = null;
 		
 		try {
 			lista = nNotaCallWS.findByTipoNota(tipoNota);
@@ -59,14 +59,29 @@ public class ItemBO {
 
 	
 	
-	public List<NNota> findByIdCategoria(String idCategoria) throws ItemBOException{
+	public List<ItemResponse> findByIdCategoria(String idCategoria) throws ItemBOException{
 		logger.info("--- findByIdCategoria [ ItemBO ]---- ");
-		List<NNota> lista = null;
+		List<ItemResponse> lista = null;
 		
 		try {
 			lista = nNotaCallWS.findByIdCategoria(idCategoria);
 		} catch (Exception e) {
 			logger.error(" -- Error  findByIdCategoria [ ItemBO ]:", e);
+			throw new ItemBOException(e.getMessage());
+		}
+		
+		return lista;
+	}
+	
+	
+	public List<MagazineResponse> findByMagazine(String idMagazine) throws ItemBOException{
+		logger.info("--- findByMagazine [ ItemBO ]---- ");
+		List<MagazineResponse> lista = null;
+		
+		try {
+			lista = nNotaCallWS.findByMagazine(idMagazine);
+		} catch (Exception e) {
+			logger.error(" -- Error  findByMagazine [ ItemBO ]:", e);
 			throw new ItemBOException(e.getMessage());
 		}
 		

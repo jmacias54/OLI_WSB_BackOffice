@@ -16,8 +16,8 @@ public class Magazine implements Serializable {
 	private String fcIdMagazine;
 	private String fcDescripcion;
 	private String fcUrlExterna;
-	private int fiEstatus;
-	private int fiOrden;
+	private Integer fiEstatus;
+	private Integer fiOrden;
 
 	public Magazine() {
 	}
@@ -46,19 +46,19 @@ public class Magazine implements Serializable {
 		this.fcUrlExterna = fcUrlExterna;
 	}
 
-	public int getFiEstatus() {
+	public Integer getFiEstatus() {
 		return this.fiEstatus;
 	}
 
-	public void setFiEstatus(int fiEstatus) {
+	public void setFiEstatus(Integer fiEstatus) {
 		this.fiEstatus = fiEstatus;
 	}
 
-	public int getFiOrden() {
+	public Integer getFiOrden() {
 		return this.fiOrden;
 	}
 
-	public void setFiOrden(int fiOrden) {
+	public void setFiOrden(Integer fiOrden) {
 		this.fiOrden = fiOrden;
 	}
 
