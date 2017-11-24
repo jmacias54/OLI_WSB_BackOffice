@@ -16,7 +16,7 @@ import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 import mx.com.amx.unotv.oli.wsb.backoffice.model.Magazine;
-import mx.com.amx.unotv.oli.wsb.backoffice.response.ListResponse;
+import mx.com.amx.unotv.oli.wsb.backoffice.response.MagazineList;
 import mx.com.amx.unotv.oli.wsb.backoffice.ws.exception.MagazineCallWSException;
 
 /**
@@ -72,13 +72,13 @@ public class MagazineCallWS {
 		
 		logger.info("--- URL : " + URL_WS);
 
-		ListResponse<Magazine> response = null;
+		MagazineList response = null;
 
 		try {
 			logger.info("URL_WS: " + URL_WS);
 			HttpEntity<String> entity = new HttpEntity<String>("Accept=application/json; charset=utf-8", headers);
 			
-			response = restTemplate.postForObject(URL_WS , entity, ListResponse.class);
+			response = restTemplate.postForObject(URL_WS , entity, MagazineList.class);
 
 			if(response != null)
 			logger.info(" Registros obtenidos --> " + response.toString());
@@ -96,7 +96,7 @@ public class MagazineCallWS {
 		}
 		
 		if(response == null) {
-			response = new ListResponse<Magazine>();
+			response = new MagazineList();
 			response.setLista(Collections.<Magazine>emptyList());
 		}
 

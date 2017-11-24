@@ -17,8 +17,9 @@ import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 import mx.com.amx.unotv.oli.wsb.backoffice.response.ItemResponse;
-import mx.com.amx.unotv.oli.wsb.backoffice.response.ListResponse;
+import mx.com.amx.unotv.oli.wsb.backoffice.response.ItemResponseList;
 import mx.com.amx.unotv.oli.wsb.backoffice.response.MagazineResponse;
+import mx.com.amx.unotv.oli.wsb.backoffice.response.MagazineResponseList;
 import mx.com.amx.unotv.oli.wsb.backoffice.ws.exception.NNotaCallWSException;
 
 
@@ -75,13 +76,14 @@ public class NNotaCallWS {
 		
 		logger.info("--- URL : " + URL_WS);
 
-		ListResponse<ItemResponse> response = null;
+
+		ItemResponseList response = null;
 
 		try {
 			logger.info("URL_WS: " + URL_WS);
 			HttpEntity<String> entity = new HttpEntity<String>("Accept=application/json; charset=utf-8", headers);
 			
-			response = restTemplate.postForObject(URL_WS , entity, ListResponse.class);
+			response = restTemplate.postForObject(URL_WS , entity, ItemResponseList.class);
 
 			if(response != null)
 			logger.info(" Registros obtenidos --> " + response.toString());
@@ -99,7 +101,7 @@ public class NNotaCallWS {
 		}
 		
 		if(response == null) {
-			response = new ListResponse<ItemResponse>();
+			response = new ItemResponseList();
 			response.setLista(Collections.<ItemResponse>emptyList());
 		}
 
@@ -115,13 +117,13 @@ public class NNotaCallWS {
 
 		logger.info("--- URL : " + URL_WS);
 
-		ListResponse<ItemResponse> response = null;
+		ItemResponseList response = null;
 
 		try {
 			logger.info("URL_WS: " + URL_WS);
 			HttpEntity<String> entity = new HttpEntity<String>("Accept=application/json; charset=utf-8", headers);
 			
-			response = restTemplate.postForObject(URL_WS , entity, ListResponse.class);
+			response = restTemplate.postForObject(URL_WS , entity, ItemResponseList.class);
 
 			if(response != null)
 			logger.info(" Registros obtenidos --> " + response.toString());
@@ -139,7 +141,7 @@ public class NNotaCallWS {
 		}
 		
 		if(response == null) {
-			response = new ListResponse<ItemResponse>();
+			response = new ItemResponseList();
 			response.setLista(Collections.<ItemResponse>emptyList());
 		}
 
@@ -156,13 +158,13 @@ public class NNotaCallWS {
 
 		logger.info("--- URL : " + URL_WS);
 
-		ListResponse<ItemResponse> response = null;
+		ItemResponseList response = null;
 
 		try {
 			logger.info("URL_WS: " + URL_WS);
 			HttpEntity<String> entity = new HttpEntity<String>("Accept=application/json; charset=utf-8", headers);
 			
-			response = restTemplate.postForObject(URL_WS , entity, ListResponse.class);
+			response = restTemplate.postForObject(URL_WS , entity, ItemResponseList.class);
 
 			if(response != null)
 			logger.info(" Registros obtenidos --> " + response.toString());
@@ -180,7 +182,7 @@ public class NNotaCallWS {
 		}
 		
 		if(response == null) {
-			response = new ListResponse<ItemResponse>();
+			response = new ItemResponseList();
 			response.setLista(Collections.<ItemResponse>emptyList());
 		}
 
@@ -199,13 +201,13 @@ public class NNotaCallWS {
 
 		logger.info("--- URL : " + URL_WS);
 
-		ListResponse<MagazineResponse> response = null;
+		MagazineResponseList response = null;
 
 		try {
 			logger.info("URL_WS: " + URL_WS);
 			HttpEntity<String> entity = new HttpEntity<String>("Accept=application/json; charset=utf-8", headers);
 			
-			response = restTemplate.postForObject(URL_WS , entity, ListResponse.class);
+			response = restTemplate.postForObject(URL_WS , entity, MagazineResponseList.class);
 
 			if(response != null)
 			logger.info(" Registros obtenidos --> " + response.toString());
@@ -223,7 +225,7 @@ public class NNotaCallWS {
 		}
 		
 		if(response == null) {
-			response = new ListResponse<MagazineResponse>();
+			response = new MagazineResponseList();
 			response.setLista(Collections.<MagazineResponse>emptyList());
 		}
 
