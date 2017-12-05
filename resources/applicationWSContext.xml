@@ -21,13 +21,14 @@
 	<bean id="magazineCallWS" class="mx.com.amx.unotv.oli.wsb.backoffice.ws.MagazineCallWS"></bean>
 	<bean id="nNotaCallWS" class="mx.com.amx.unotv.oli.wsb.backoffice.ws.NNotaCallWS"></bean>
 	<bean id="iMagazineCallWS" class="mx.com.amx.unotv.oli.wsb.backoffice.ws.IMagazineCallWS"></bean>
+	<bean id="categoriaCallWS" class="mx.com.amx.unotv.oli.wsb.backoffice.ws.CategoriaCallWS"></bean>
 
 
 
 	<!-- Business Object -->
 	<bean id="itemBO" class="mx.com.amx.unotv.oli.wsb.backoffice.bo.ItemBO"></bean>
 	<bean id="magazineBO" class="mx.com.amx.unotv.oli.wsb.backoffice.bo.MagazineBO"></bean>
-	
+	<bean id="categoriaBO" class="mx.com.amx.unotv.oli.wsb.backoffice.bo.CategoriaBO"></bean>
 
 
 
