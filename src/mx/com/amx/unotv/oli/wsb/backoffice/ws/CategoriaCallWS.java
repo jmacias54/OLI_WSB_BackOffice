@@ -26,7 +26,7 @@ import mx.com.amx.unotv.oli.wsb.backoffice.ws.exception.CategoriaCallWSException
 public class CategoriaCallWS {
 	
 
-	private static Logger logger = Logger.getLogger(MagazineCallWS.class);
+	private static Logger logger = Logger.getLogger(CategoriaCallWS.class);
 
 	private RestTemplate restTemplate;
 	private String URL_WS_BASE = "";
