@@ -8,7 +8,6 @@ package mx.com.amx.unotv.oli.wsb.backoffice.response;
  *
  */
 public class MagazineResponse {
-
 	private String fc_id_contenido;
 	private String fc_id_categoria;
 	private String fc_tipo_nota;
@@ -23,6 +22,10 @@ public class MagazineResponse {
 	private String fc_url_externa;
 	private String fi_orden;
 	
+	private String fc_live_vod;
+	
+	
+	
 	
 	
 	
@@ -36,6 +39,18 @@ public class MagazineResponse {
 	
 	
 	
+	public String getFc_live_vod() {
+		return fc_live_vod;
+	}
+
+
+
+	public void setFc_live_vod(String fc_live_vod) {
+		this.fc_live_vod = fc_live_vod;
+	}
+
+
+
 	public String getFc_id_contenido() {
 		return fc_id_contenido;
 	}
@@ -114,6 +129,9 @@ public class MagazineResponse {
 	public void setFi_orden(String fi_orden) {
 		this.fi_orden = fi_orden;
 	}
+
+
+
 	@Override
 	public String toString() {
 		return "MagazineResponse [fc_id_contenido=" + fc_id_contenido + ", fc_id_categoria=" + fc_id_categoria
@@ -121,9 +139,9 @@ public class MagazineResponse {
 				+ fc_titulo + ", fc_descripcion=" + fc_descripcion + ", fc_friendy_url=" + fc_friendy_url
 				+ ", fc_imagen=" + fc_imagen + ", fc_fecha_publicacion=" + fc_fecha_publicacion
 				+ ", fc_descripcion_categoria=" + fc_descripcion_categoria + ", fc_id_magazine=" + fc_id_magazine
-				+ ", fc_url_externa=" + fc_url_externa + ", fi_orden=" + fi_orden + "]";
+				+ ", fc_url_externa=" + fc_url_externa + ", fi_orden=" + fi_orden + ", fc_live_vod=" + fc_live_vod
+				+ "]";
 	}
 
-	
 	
 }
